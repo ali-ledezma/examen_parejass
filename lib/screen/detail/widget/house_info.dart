@@ -1,59 +1,94 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class HouseInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: 20),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20),
       child: Column(
         children: [
           Row(
             children: [
-              MenuInfo(
-                  imageUrl: 'assets/icons/bedroom.svg',
-                  content: '5 Bedroom\n3 Master Bedroom'),
-              MenuInfo(
-                  imageUrl: 'assets/icons/bathroom.svg',
-                  content: '5 Bathroom\n3 Toilet'),
+              _buildRoomInfo(
+                context,
+                icon: 'assets/icons/bedroom.svg',
+                title: '5 Bedroom',
+                subtitle: '3 Master Bedroom',
+              ),
+              const SizedBox(width: 16),
+              _buildRoomInfo(
+                context,
+                icon: 'assets/icons/bathroom.svg',
+                title: '5 Bathroom',
+                subtitle: '3 Toilet',
+              ),
             ],
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 16),
           Row(
             children: [
-              MenuInfo(
-                  imageUrl: 'assets/icons/kitchen.svg',
-                  content: '2 Kitchen\n120 sqft'),
-              MenuInfo(
-                  imageUrl: 'assets/icons/parking.svg',
-                  content: '2 Parking\n120 sqft'),
+              _buildRoomInfo(
+                context,
+                icon: 'assets/icons/kitchen.svg',
+                title: '2 Kitchen',
+                subtitle: '120 sqft',
+              ),
+              const SizedBox(width: 16),
+              _buildRoomInfo(
+                context,
+                icon: 'assets/icons/parking.svg',
+                title: '2 Parking',
+                subtitle: '120 sqft',
+              ),
             ],
-          )
+          ),
         ],
       ),
     );
   }
-}
 
-class MenuInfo extends StatelessWidget {
-  final String imageUrl;
-  final String content;
-  const MenuInfo({Key? key, required this.imageUrl, required this.content})
-      : super(key: key);
+  Widget _buildRoomInfo(
+    BuildContext context, {
+    required String icon,
+    required String title,
+    required String subtitle,
+  }) {
+    final theme = Theme.of(context);
 
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: Expanded(
+    return Expanded(
+      child: Container(
+        padding: const EdgeInsets.all(12),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(8),
+          color: theme.colorScheme.surfaceVariant,
+        ),
         child: Row(
           children: [
-            SvgPicture.asset(imageUrl),
-            SizedBox(width: 20),
-            Text(
-              content,
-              style:
-                  Theme.of(context).textTheme.bodyText1!.copyWith(fontSize: 12),
-            )
+            SvgPicture.asset(
+              icon,
+              width: 24,
+              height: 24,
+              color: theme.colorScheme.primary, // Solución simple
+            ),
+            const SizedBox(width: 12),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  title,
+                  style: theme.textTheme.bodyMedium?.copyWith(
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Text(
+                  subtitle,
+                  style: theme.textTheme.bodySmall?.copyWith(
+                    color: theme.colorScheme.onSurface.withOpacity(0.7),
+                  ),
+                ),
+              ],
+            ),
           ],
         ),
       ),

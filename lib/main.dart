@@ -7,19 +7,30 @@ void main() {
 
 class MyApp extends StatelessWidget {
   @override
-  Widget build(Object context) {
+  Widget build(BuildContext context) {
     return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-            backgroundColor: Color(0xFFF5F6F6),
-            primaryColor: Color(0xFF811B83),
-            accentColor: Color(0xFFFA5019),
-            textTheme: TextTheme(
-              headline1: TextStyle(
-                color: Color(0xFF100E34),
-              ),
-              bodyText1: TextStyle(color: Color(0xFF100E34).withOpacity(0.5)),
-            )),
-        home: HomePage());
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        scaffoldBackgroundColor:
+            Color(0xFFF5F6F6), // Changed from backgroundColor
+        primaryColor: Color(0xFF811B83),
+        colorScheme: ColorScheme.light(
+          secondary: Color(0xFFFA5019), // Replaces accentColor
+        ),
+        textTheme: TextTheme(
+          displayLarge: TextStyle(
+            // Replaces headline1
+            color: Color(0xFF100E34),
+          ),
+          bodyLarge: TextStyle(
+            // Replaces bodyText1
+            color: Color(0xFF100E34).withOpacity(0.5),
+          ),
+        ),
+      ),
+      home: Scaffold(
+        body: HomePage(),
+      ),
+    );
   }
 }

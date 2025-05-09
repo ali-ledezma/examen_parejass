@@ -7,50 +7,55 @@ class ContentIntro extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
+    final colorScheme = Theme.of(context).colorScheme;
+
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 20),
+      padding: const EdgeInsets.symmetric(horizontal: 20),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(house.name,
-              style: Theme.of(context)
-                  .textTheme
-                  .headline1!
-                  .copyWith(fontSize: 20, fontWeight: FontWeight.bold)),
-          SizedBox(
-            height: 10,
+          Text(
+            house.name,
+            style: textTheme.headlineSmall?.copyWith(
+              fontWeight: FontWeight.bold,
+              color: colorScheme.onSurface,
+            ),
           ),
+          const SizedBox(height: 10),
           Text(
             house.address,
-            style:
-                Theme.of(context).textTheme.bodyText1!.copyWith(fontSize: 14),
+            style: textTheme.bodyMedium?.copyWith(
+              color: colorScheme.onSurface.withOpacity(0.8),
+            ),
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           Text(
             '5000 sqft',
-            style:
-                Theme.of(context).textTheme.bodyText1!.copyWith(fontSize: 14),
+            style: textTheme.bodyMedium?.copyWith(
+              color: colorScheme.onSurface.withOpacity(0.8),
+            ),
           ),
-          SizedBox(
-            height: 5,
-          ),
+          const SizedBox(height: 5),
           RichText(
-            text: TextSpan(children: [
-              TextSpan(
+            text: TextSpan(
+              style: textTheme.bodyMedium?.copyWith(
+                color: colorScheme.onSurface.withOpacity(0.8),
+              ),
+              children: [
+                TextSpan(
                   text: '\$4455 ',
-                  style: Theme.of(context)
-                      .textTheme
-                      .headline1!
-                      .copyWith(fontSize: 16, fontWeight: FontWeight.bold)),
-              TextSpan(
-                text: 'Fer Month',
-                style: Theme.of(context)
-                    .textTheme
-                    .bodyText1!
-                    .copyWith(fontSize: 14),
-              )
-            ]),
-          )
+                  style: textTheme.headlineSmall?.copyWith(
+                    fontWeight: FontWeight.bold,
+                    color: colorScheme.primary,
+                  ),
+                ),
+                const TextSpan(
+                  text: 'Per Month',
+                ),
+              ],
+            ),
+          ),
         ],
       ),
     );

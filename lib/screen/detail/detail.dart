@@ -11,37 +11,46 @@ class DetailPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+
     return Scaffold(
-        body: SingleChildScrollView(
-            child: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        DetailAppBar(house: house),
-        SizedBox(height: 20),
-        ContentIntro(house: house),
-        SizedBox(height: 20),
-        HouseInfo(),
-        SizedBox(height: 20),
-        About(),
-        SizedBox(height: 25),
-        Container(
-            padding: EdgeInsets.symmetric(horizontal: 20),
-            child: ElevatedButton(
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            DetailAppBar(house: house),
+            SizedBox(height: 20),
+            ContentIntro(house: house),
+            SizedBox(height: 20),
+            HouseInfo(), // Removido const
+            SizedBox(height: 20),
+            About(), // Removido const
+            SizedBox(height: 25),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20),
+              child: ElevatedButton(
                 onPressed: () {},
                 style: ElevatedButton.styleFrom(
                   shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8)),
-                  primary: Theme.of(context).primaryColor,
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  backgroundColor: colorScheme.primary,
+                  minimumSize: Size(double.infinity, 50),
                 ),
-                child: Container(
-                    alignment: Alignment.center,
-                    padding: EdgeInsets.symmetric(vertical: 15),
-                    child: Text('Book Now',
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold)))))
-      ],
-    )));
+                child: Text(
+                  'Book Now',
+                  style: theme.textTheme.titleMedium?.copyWith(
+                    color: colorScheme.onPrimary,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(height: 20),
+          ],
+        ),
+      ),
+    );
   }
 }
